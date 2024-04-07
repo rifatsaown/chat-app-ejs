@@ -2,5 +2,6 @@ export default {
     port : process.env.PORT,
     mongoUri : process.env.MONGO_URI,
     dbName : process.env.DB_NAME,
-    env: process.env.NODE_ENV
+    env: process.env.NODE_ENV,
+    cookieSecret : process.env.COOKIE_SECRET,
 }

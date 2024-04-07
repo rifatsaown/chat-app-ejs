@@ -55,13 +55,17 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   }
 
   //ultimate return 
-  return res.status(statusCode).json({
-    success: false,
-    message,
-    errorSources,
-    err,
-    stack: configs.env === 'development' ? err?.stack : null,
-  })
+  if(res.locals.html){
+    res.status(statusCode).render('error', { title: 'Error', statusCode, message, errorSources })
+  } else {
+    res.status(statusCode).json({
+      success: false,
+      message,
+      errorSources,
+      err,
+      stack: configs.env === 'development' ? err?.stack : null,
+    })
+  }
 }
 
 export default globalErrorHandler
